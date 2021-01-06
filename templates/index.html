@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Shopify Application</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head> 
+
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">Home</a>
+          </nav>
+
+        <form class= "border border-primary" method=post enctype=multipart/form-data style="padding:20px; margin:auto; width:50%">
+            <h5 style="padding:20px; margin:auto; width:50%">
+                Add a new Product!
+            </h5>
+            <div class="form-group" >
+                <label for="name">Name of Product</label>
+                <input type=text name=name id=name>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type=number name=price id=price>
+            </div>
+
+            <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type=number name=stock id=stock>
+            </div>
+
+
+            <div class="form-group">
+                <label for="file">Image</label>
+                <input type=file name=file id=file>
+            </div>
+            <button type="submit" value=Upload class="btn btn-primary">Submit</button>
+          </form>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <h6>Name</h6>
+                </div>
+                <div class="col-2">
+                    <h6>Price</h6>
+                </div>
+                <div class="col-2">
+                    <h6>Stock</h6>
+                </div>
+                <div class="col-4">
+                    <h6>Image</h6>
+                </div>
+            </div>
+            {% for product in products %}
+            <div class="row">
+                <div class="col-3">
+                    {{product["name"]}}
+                </div>
+                <div class="col-2">
+                    {{product["price"]}}
+                </div>
+                <div class="col-2">
+                    {{product["stock"]}}
+                </div>
+                <div class="col-4">
+                    <a href='/buy/{{product["id"]}}' title="Click to buy!">
+                        <img src='{{product["src"]}}' style='height: 100%; width: 100%; object-fit: contain'/>
+                    </a>
+                </div>
+                <!-- <div class="col-2">
+                    <a href='/buy/{{product["id"]}}'>BUY</button>
+                </div> -->
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
