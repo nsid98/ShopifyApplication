@@ -64,13 +64,10 @@
                     {{product["stock"]}}
                 </div>
                 <div class="col-4">
-                    <a href='/buy/{{product["id"]}}' title="Click to buy!">
+                    <a href='/buy/{{product["id"]}}' onclick="confirm('Are you sure you would like to buy this?')" title="Click to buy!">
                         <img src='{{product["src"]}}' style='height: 100%; width: 100%; object-fit: contain'/>
                     </a>
                 </div>
-                <!-- <div class="col-2">
-                    <a href='/buy/{{product["id"]}}'>BUY</button>
-                </div> -->
             </div>
             {% endfor %}
         </div>

@@ -71,10 +71,18 @@ def buy(product_id):
 
     (cur, conn) = get_cursor()
 
+    cur.execute("SELECT rowid, price, stock FROM products WHERE rowid = ?", (product_id,))
+    (rowid, price, stock) = cur.fetchone()
+    
+    if(stock == 1):
+        cur.execute("DELETE FROM products WHERE rowid = " + product_id)
+        conn.commit()
+        return render_template("message.html", message="You got the last one!")
+
     cur.execute("UPDATE products SET stock = stock - 1 WHERE rowid = " + product_id)
     conn.commit()
-    return home_page()
+    return render_template("message.html", message="You purchased your item!")
 
 if __name__ == '__main__':
     initialize_db()
-    app.run()
+    app.run(debug=True)
